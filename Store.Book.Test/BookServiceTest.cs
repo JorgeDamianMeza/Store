@@ -19,6 +19,7 @@ namespace Store.Book.Test
 
         private IEnumerable<LibraryMaterial> DataTest()
         {
+            //This method is fulled with Genfu Data
             A.Configure<LibraryMaterial>()
                 .Fill(x => x.Title).AsArticleTitle()
                 .Fill(x => x.LibraryMaterialId, () => { return Guid.NewGuid(); });
@@ -46,7 +47,6 @@ namespace Store.Book.Test
             var context = new Mock<LibraryContext>();
             context.Setup(x=> x.LibraryMaterials).Returns(dbSet.Object);
             return context;
-
         }
 
         [Fact]
@@ -75,7 +75,6 @@ namespace Store.Book.Test
         [Fact]
         public async void GetLibros()
         {          
-
             var mokContext = CreateContext();
 
             var mapConfig = new MapperConfiguration(cfg =>
@@ -85,20 +84,15 @@ namespace Store.Book.Test
 
             var mapper = mapConfig.CreateMapper();
 
-
             Query.Handler handler = new Query.Handler(mokContext.Object, mapper);
             Query.Execute request = new Query.Execute();
             var list = await handler.Handle(request, new System.Threading.CancellationToken());
-
             Assert.True(list.Any());
-
-
         }
 
         [Fact]
         public async void SaveBook()
         {          
-
             var options = new DbContextOptionsBuilder<LibraryContext>()
                 .UseInMemoryDatabase(databaseName: "DataBaseBook")
                 .Options;
@@ -114,7 +108,6 @@ namespace Store.Book.Test
             var book = await handler.Handle(request, new System.Threading.CancellationToken());
 
             Assert.True(book != null);
-
         }
 
     }
