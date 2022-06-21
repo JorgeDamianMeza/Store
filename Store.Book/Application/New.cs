@@ -2,6 +2,8 @@
 using MediatR;
 using Store.Book.Model;
 using Store.Book.Persistence;
+using Store.RabbitMQ.Bus.BusRabbit;
+using Store.RabbitMQ.Bus.EventQueue;
 
 namespace Store.Book.Application
 {
@@ -27,6 +29,7 @@ namespace Store.Book.Application
         public class Handler : IRequestHandler<Execute>
         {
             private readonly LibraryContext _libraryContext;
+            private readonly IRabbitEventBus _eventBus;
 
             public Handler(LibraryContext libraryContext)
             {
@@ -45,7 +48,11 @@ namespace Store.Book.Application
 
                 _libraryContext.LibraryMaterials.Add(book);
                 var value = await _libraryContext.SaveChangesAsync();
-                if(value > 0) { return Unit.Value; }
+
+                _eventBus.Publish(new EmailEventQueue("naimad.xrz@hotmail.com", request.Title, "This content is a example"));
+
+                if (value > 0) { return Unit.Value; }
+
 
                 throw new Exception("The book could not be saved");
 

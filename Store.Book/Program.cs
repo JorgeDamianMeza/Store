@@ -3,10 +3,14 @@ using Store.Book.Persistence;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Store.Book.Application;
+using Store.RabbitMQ.Bus.Implement;
+using Store.RabbitMQ.Bus.BusRabbit;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddTransient<IRabbitEventBus, RabbitEventBus>();
 
 builder.Services.AddControllers().AddFluentValidation(cfg => cfg.RegisterValidatorsFromAssemblyContaining<New>());
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
