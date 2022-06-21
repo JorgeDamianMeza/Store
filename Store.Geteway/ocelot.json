@@ -1,0 +1,91 @@
+{
+  "Aggregates": [
+    {
+      "RouteKeys": [
+        "AuthorTotal",
+        "BookTotal"
+      ],
+      "UpstreamPathTemplate": "/BookAuthor"
+    }
+  ],
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/LibraryMaterial",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "store.book",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Book",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "Key": "BookTotal"
+    },
+    {
+      "DownstreamPathTemplate": "/api/LibraryMaterial/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "store.book",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Book/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "DelegatingHandlers": [
+        "BookHandler"
+      ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/Author",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "store.author",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Author",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+      "Key": "AuthorTotal"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Author/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "store.author",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/Author/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ],
+      "Key": "Author"
+    },
+    {
+      "DownstreamPathTemplate": "/api/ShoppingCart",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "store.shoppingcart",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ShoppingCart",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/ShoppingCart/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "store.shoppingcart",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/ShoppingCart/{id}",
+      "UpstreamHttpMethod": [ "GET", "DELETE" ]
+    }
+  ]
+}

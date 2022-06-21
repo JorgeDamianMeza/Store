@@ -20,6 +20,7 @@ namespace Store.ShoppingCart.RemoteService
         {
             try
             {
+                var newBookId = bookId.ToString().ToUpper();
                 var client = _httpClientFactory.CreateClient("Books");
                 var response = await client.GetAsync($"api/LibraryMaterial/{bookId}");
                 if (response.IsSuccessStatusCode)

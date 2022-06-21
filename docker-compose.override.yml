@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  store.author:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development     
+    ports:
+      - "6104:80"      
+  store.book:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development     
+    ports:
+      - "6105:80"          
+  store.shoppingcart:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development          
+      - Services__Books=http://store.book
+    ports:
+      - "6106:80"
+  store.geteway:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development     
+      - Services__Author=http://store.gateway   
+    ports:
+      - "6107:80"
+     

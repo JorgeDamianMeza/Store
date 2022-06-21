@@ -1,0 +1,32 @@
+version: '3.4'
+
+services:
+  store.author:
+    image: ${DOCKER_REGISTRY-}storeauthor
+    build:
+      context: .
+      dockerfile: Store/Dockerfile
+
+  store.book:
+    image: ${DOCKER_REGISTRY-}storebook
+    build:
+      context: .
+      dockerfile: Store.Book/Dockerfile
+  store.shoppingcart:
+    image: ${DOCKER_REGISTRY-}storeshoppingcart
+    build:
+      context: .
+      dockerfile: Store.ShoppingCart/Dockerfile
+
+  store.geteway:
+    image: ${DOCKER_REGISTRY-}storegeteway
+    build:
+      context: .
+      dockerfile: Store.Geteway/Dockerfile
+
+networks:
+  default:
+    external:
+      name: microservicenet
+
+
