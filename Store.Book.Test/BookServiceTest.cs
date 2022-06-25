@@ -104,7 +104,7 @@ namespace Store.Book.Test
             request.BookAuthor = Guid.Empty;
             request.PublicacionDate = DateTime.Now;
 
-            var handler = new New.Handler(context);
+            var handler = new New.Handler(context,null);
             var book = await handler.Handle(request, new System.Threading.CancellationToken());
 
             Assert.True(book != null);
