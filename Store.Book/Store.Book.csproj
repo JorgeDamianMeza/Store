@@ -29,7 +29,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Store.RabbitMQ.Bus\Store.RabbitMQ.Bus.csproj" />
+	  <ProjectReference Include="..\Store.RabbitMQ.Bus\Store.RabbitMQ.Bus.csproj" />
 	</ItemGroup>
 
 </Project>

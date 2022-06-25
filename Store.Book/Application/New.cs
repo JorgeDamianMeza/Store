@@ -31,9 +31,10 @@ namespace Store.Book.Application
             private readonly LibraryContext _libraryContext;
             private readonly IRabbitEventBus _eventBus;
 
-            public Handler(LibraryContext libraryContext)
+            public Handler(LibraryContext libraryContext,IRabbitEventBus rabbitEventBus)
             {
                 _libraryContext = libraryContext;
+                _eventBus = rabbitEventBus;
             }
 
 

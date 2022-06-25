@@ -28,4 +28,9 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Store.Messenger.Email\Store.Messenger.Email.csproj" />
+    <ProjectReference Include="..\Store.RabbitMQ.Bus\Store.RabbitMQ.Bus.csproj" />
+  </ItemGroup>
+
 </Project>
